@@ -1,71 +1,269 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device‑width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smart Signage</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
     body {
+      font-family: 'Roboto', sans-serif;
       margin: 0;
-      padding: 0;
-      font-family: Arial, sans‑serif;
-      background: #f5f5f5;
+      background-color: #f8f8f8;
       color: #333;
+      scroll-behavior: smooth;
     }
-    header {
-      background: #004a99;
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
+
+    /* --- NAVBAR --- */
+    nav {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      transition: all 0.3s ease;
     }
-    header h1 {
-      margin: 0;
-      font-size: 3em;
+
+    nav img {
+      height: 50px;
+      max-width: 150px;
     }
-    main {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
+
+    .nav-buttons {
+      display: flex;
+      gap: 0.8rem;
     }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto‑fill, minmax(250px, 1fr));
-      gap: 20px;
+
+    .nav-buttons a {
+      color: #FF6C00;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
     }
-    .gallery img {
+
+    .nav-buttons a:hover {
+      border-bottom: 2px solid #FF6C00;
+      color: #e05f00;
+      transform: scale(1.05);
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      position: relative;
       width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
+      height: 400px;
+      overflow: hidden;
     }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.5s ease;
+    }
+
+    .hero:hover img {
+      transform: scale(1.05);
+    }
+
+    .intro-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translate(-50%, -60%);}
+      to {opacity: 1; transform: translate(-50%, -50%);}
+    }
+
+    /* --- SECCIONES INFERIORES --- */
+    .sections {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1rem;
+    }
+
+    .section {
+      background-color: white;
+      border-radius: 1rem;
+      padding: 1.2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      overflow: hidden;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+
+    .section.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .section img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 0.8rem;
+      margin-bottom: 0.8rem;
+      transition: transform 0.4s ease;
+    }
+
+    .section:hover img {
+      transform: scale(1.05);
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      color: #002244;
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1rem;
+      padding: 0 0.4rem;
+    }
+
+    .btn {
+      background: linear-gradient(45deg, #FF6C00, #FF8C42);
+      color: white;
+      padding: 0.7rem 1.4rem;
+      border: none;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(255,108,0,0.6);
+    }
+
     footer {
       text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-      color: #777;
+      font-size: 0.8rem;
+      color: #666;
+      padding: 1rem 0 1.5rem;
+    }
+
+    /* --- MEDIA QUERIES --- */
+    @media (min-width: 600px) {
+      .hero { height: 500px; }
+      .intro-text { font-size: 2rem; }
+      .section img { height: 220px; }
+      .sections { flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
+      .section { flex: 0 0 48%; }
+    }
+
+    @media (min-width: 1024px) {
+      .hero { height: 600px; }
+      .intro-text { font-size: 2.5rem; padding: 1.5rem 3rem; }
+      .sections {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin: 2rem;
+      }
+      .section img { height: 250px; }
+      .section { padding: 1.5rem; }
+      .hero img { transition: transform 2s ease; }
+      .hero:hover img { transform: scale(1.07); }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Smart Signage</h1>
-    <p>Transforma tus espacios con señalización digital inteligente</p>
-  </header>
+  <!-- NAVBAR -->
+  <nav>
+    <img src="https://via.placeholder.com/150x50?text=Smart+Signage" alt="Smart Signage Logo">
+    <div class="nav-buttons">
+      <a href="#">Home</a>
+      <a href="#">Servicios</a>
+      <a href="#">Clientes</a>
+      <a href="#">Contacto</a>
+    </div>
+  </nav>
 
-  <main>
-    <section class="gallery">
-      <img src="imagen1.jpg" alt="Smart Signage pantalla 1">
-      <img src="imagen2.jpg" alt="Smart Signage pantalla 2">
-      <img src="imagen3.jpg" alt="Smart Signage pantalla 3">
-      <img src="imagen4.jpg" alt="Smart Signage pantalla 4">
-      <!-- Reemplaza las URLs de imagen1.jpg, etc., por imágenes reales -->
+  <!-- HERO IMAGE -->
+  <div class="hero">
+    <img src="https://via.placeholder.com/1200x600?text=Smart+Signage+Hero" alt="Smart Signage">
+    <p class="intro-text">La señalización digital que transforma tus espacios</p>
+  </div>
+
+  <!-- SECCIONES INFERIORES -->
+  <div class="sections">
+    <section class="section">
+      <img src="https://via.placeholder.com/600x400?text=Alojamientos" alt="Alojamientos">
+      <h2>Alojamientos</h2>
+      <p>Optimiza la comunicación con tus huéspedes mediante señalización digital moderna e interactiva.</p>
+      <a class="btn" href="#">Ver Más</a>
     </section>
-  </main>
+
+    <section class="section">
+      <img src="https://via.placeholder.com/600x400?text=Hosteleria" alt="Hostelería">
+      <h2>Hostelería</h2>
+      <p>Mejora la experiencia de tus clientes con menús digitales, promociones y contenidos dinámicos.</p>
+      <a class="btn" href="#">Ver Más</a>
+    </section>
+
+    <section class="section">
+      <img src="https://via.placeholder.com/600x400?text=Entidades+Bancarias" alt="Entidades Bancarias">
+      <h2>Entidades Bancarias</h2>
+      <p>Comunica información relevante y personalizada en tiempo real para clientes y visitantes.</p>
+      <a class="btn" href="#">Ver Más</a>
+    </section>
+
+    <section class="section">
+      <img src="https://via.placeholder.com/600x400?text=Universidades" alt="Universidades">
+      <h2>Universidades</h2>
+      <p>Gestiona avisos, eventos y señalización interactiva para estudiantes y personal académico.</p>
+      <a class="btn" href="#">Ver Más</a>
+    </section>
+  </div>
 
   <footer>
-    &copy; 2025 Smart Signage – Todos los derechos reservados.
+    © 2025 Smart Signage – Todos los derechos reservados.
   </footer>
+
+  <script>
+    // Animación al hacer scroll
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+    sections.forEach(section => observer.observe(section));
+  </script>
 
 </body>
 </html>
