@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device‑width, initial-scale=1.0">
+  <title>Smart Signage</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans‑serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background: #004a99;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+    }
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto‑fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Smart Signage</h1>
+    <p>Transforma tus espacios con señalización digital inteligente</p>
+  </header>
+
+  <main>
+    <section class="gallery">
+      <img src="imagen1.jpg" alt="Smart Signage pantalla 1">
+      <img src="imagen2.jpg" alt="Smart Signage pantalla 2">
+      <img src="imagen3.jpg" alt="Smart Signage pantalla 3">
+      <img src="imagen4.jpg" alt="Smart Signage pantalla 4">
+      <!-- Reemplaza las URLs de imagen1.jpg, etc., por imágenes reales -->
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Smart Signage – Todos los derechos reservados.
+  </footer>
+
+</body>
+</html>
